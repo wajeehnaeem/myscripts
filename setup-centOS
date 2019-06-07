@@ -1,0 +1,20 @@
+yum update -y
+yum install epel-release -y
+yum update -y
+yum install wget -y
+yum install zsh -y
+yum install glances -y
+yum install vim -y
+yum install curl -y
+wget get.docker.com
+mv index.html docker.sh
+chmod +x docker.sh
+sh docker.sh
+systemctl enable docker.service
+systemctl start docker.service
+usermod -a wajeehahmed -G docker
+docker pull postgres
+docker run -d -p 5432:5432 --name=postgresdb --restart=always -e='POSTGRES_PASSWORD=postgres' postgres:latest
+firewall-cmd --permanent --add-service=postgres
+firewall-cmd --permanent --add-service=postgresql
+firewall-cmd --reload
